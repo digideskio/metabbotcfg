@@ -1,8 +1,7 @@
 # Provides a base Ubuntu (14.04) image with latest buildbot slave installed
 # (based on twsited dockerfile https://github.com/cyli/docker-twisted)
 
-# djmitche/buildbot-worker is built from https://github.com/buildbot/buildbot/blob/master/master/contrib/docker/slave/Dockerfile
-FROM        buildbot/buildbot-worker:latest
+FROM        buildbot/buildbot-worker:master
 MAINTAINER  Buildbot Maintainers
 
 RUN apt-get update
@@ -16,4 +15,4 @@ RUN chmod +x /usr/local/bin/dumb-init
 CMD ["/usr/local/bin/dumb-init", "twistd", "-ny", "buildbot.tac"]
 
 # install the DB drivers we need to test against databases, as well as git
-RUN apt-get install -y libmysqlclient-dev libpq-dev git
+RUN apt-get install -y libmysqlclient-dev libpq-dev git libenchant-dev
